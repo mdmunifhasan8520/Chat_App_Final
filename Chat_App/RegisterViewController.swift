@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import SVProgressHUD
 
 class RegisterViewController: UIViewController {
     @IBOutlet weak var emailTextfield: UITextField!
@@ -25,7 +26,7 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func registerPressed(_ sender: AnyObject) {
-        
+        //SVProgressHUD.show()
         //TODO: Set up a new user on our Firebase database
         Auth.auth().createUser(withEmail: emailTextfield.text!, password: passwordTextfield.text!) {
             (user, error) in
@@ -34,13 +35,14 @@ class RegisterViewController: UIViewController {
             } else {
                 //success
                 print("registration Successful")
+                //SVProgressHUD.dismiss()
                 self.performSegue(withIdentifier: "goToChat", sender: self)
             }
         }
     }
     
     /*
-    // MARK: - Navigation
+    // MARK: - Navigation..
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

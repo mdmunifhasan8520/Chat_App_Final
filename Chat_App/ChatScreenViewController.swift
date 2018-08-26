@@ -8,11 +8,14 @@
 
 import UIKit
 import Firebase
+import ChameleonFramework
 
 class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
     
+    //Declare instance variable here
+    var messageArray : [Message] = [Message]()
+    
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
-    //@IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var messageTextfield: UITextField!
     @IBOutlet weak var messageTableView: UITableView!
@@ -36,6 +39,10 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         //TODO:Register MessageCell.xib file here:
         messageTableView.register(UINib(nibName: "MessageCell", bundle: nil), forCellReuseIdentifier: "customMessageCell")
+        
+        retrieveMessages()
+        
+        messageTableView.separatorStyle = .none
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,9 +60,21 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMessageCell", for: indexPath) as! CustomMessageCell
         
-        let messageArray = ["1st message", "2nd message", "3rd message"]
+        //let messageArray = ["1st message", "2nd message", "3rd message"]
+        //cell.messageBody.text = messageArray[indexPath.row]
+        cell.messageBody.text = messageArray[indexPath.row].messageBody
+        cell.senderUsername.text = messageArray[indexPath.row].sender
+        cell.avatarImageView.image = UIImage(named: "egg.png")
         
-        cell.messageBody.text = messageArray[indexPath.row]
+        
+        if cell.senderUsername.text == Auth.auth().currentUser?.email as String! {
+            //Messages 1@2 sent
+            cell.avatarImageView.backgroundColor = UIColor.flatMint()
+            cell.messageBackground.backgroundColor = UIColor.flatSkyBlue()
+        } else {
+            cell.avatarImageView.backgroundColor = UIColor.flatWatermelon()
+            cell.messageBackground.backgroundColor = UIColor.flatGray()
+        }
         
         return cell
     }
@@ -64,7 +83,7 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
     //TODO: Declare numberOfRowsInSection here:
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return 3
+        return messageArray.count
     }
     
     //////////////////////////////////
@@ -98,6 +117,28 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
                 self.messageTextfield.text = ""
             }
         }
+    }
+    
+    //TODO: Create the retrieveMessages method here:
+    
+    func retrieveMessages() {
+        
+        let messageDB = Database.database().reference().child("Messages")
+        messageDB.observe(.childAdded, with: { (snapshot) in
+            let snapshotValue = snapshot.value as! Dictionary<String,String>
+            
+            let text = snapshotValue["MessageBody"]!
+            let sender = snapshotValue["Sender"]!
+            
+            print(text, sender)
+            
+            let message = Message()
+            message.messageBody = text
+            message.sender = sender
+            
+            self.messageArray.append(message)
+            self.messageTableView.reloadData()
+        })
     }
     
   
