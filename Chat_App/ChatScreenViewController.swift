@@ -26,7 +26,7 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         
-        //TODO: Set the delegate of the text field here:
+        //TODO: Set the delegate of the text field  here:
         messageTextfield.delegate = self
         
         
@@ -67,9 +67,37 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         return 3
     }
     
+    //////////////////////////////////
+    
+    
+    //MARK: - Send & Recieve from Firebase
+    
     @IBAction func sendPressed(_ sender: AnyObject) {
         
+        messageTextfield.endEditing(true)
+        
         //TODO: Send the message to firebase and save it in our database
+        
+        messageTextfield.isEnabled = false
+        sendButton.isEnabled = false
+        
+        let messagesDB = Database.database().reference().child("Messages")
+        
+        let messageDictionary = ["Sender": Auth.auth().currentUser?.email,
+                                 "MessageBody": messageTextfield.text!]
+        
+        messagesDB.childByAutoId().setValue(messageDictionary) {
+            (error, reference) in
+            
+            if error != nil {
+                print(error!)
+            } else {
+                print("Message saved successfully")
+                self.messageTextfield.isEnabled = true
+                self.sendButton.isEnabled = true
+                self.messageTextfield.text = ""
+            }
+        }
     }
     
   
