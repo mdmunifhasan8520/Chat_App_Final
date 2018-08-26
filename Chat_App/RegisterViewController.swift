@@ -3,7 +3,7 @@
 //  Chat_App
 //
 //  Created by MacBook Pro on 8/26/18.
-//  Copyright © 2018 Code Drizzlers. All rights reserved.
+//  Copyright © 2018 Code Drizzlers. All rights reserved
 //
 
 import UIKit
