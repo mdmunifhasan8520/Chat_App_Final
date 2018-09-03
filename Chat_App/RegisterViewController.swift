@@ -32,6 +32,13 @@ class RegisterViewController: UIViewController {
             (user, error) in
             if error != nil {
                 print(error!)
+                let alert = UIAlertController(title: "Regitration Failed",
+                                              message: error?.localizedDescription,
+                                              preferredStyle: .alert)
+                
+                alert.addAction(UIAlertAction(title: "OK", style: .default))
+                
+                self.present(alert, animated: true, completion: nil)
             } else {
                 //success
                 print("registration Successful")

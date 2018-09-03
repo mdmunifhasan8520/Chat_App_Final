@@ -86,7 +86,6 @@
                                 </state>
                                 <connections>
                                     <action selector="registerPressed:" destination="SZI-eL-SV5" eventType="touchUpInside" id="x5f-wJ-geV"/>
-                                    <segue destination="cQn-S9-Nkq" kind="show" identifier="goToChat" id="ko0-qH-XWo"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -96,6 +95,7 @@
                     <connections>
                         <outlet property="emailTextfield" destination="ZSm-fP-o6a" id="Gy2-bN-pcX"/>
                         <outlet property="passwordTextfield" destination="R82-eG-PLb" id="Chc-I8-KG0"/>
+                        <segue destination="cQn-S9-Nkq" kind="show" identifier="goToChat" id="Zjw-z7-KWm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xoZ-99-8cj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -128,7 +128,6 @@
                                 </state>
                                 <connections>
                                     <action selector="logInPressed:" destination="Soh-Ah-pi6" eventType="touchUpInside" id="aKE-j0-wX0"/>
-                                    <segue destination="cQn-S9-Nkq" kind="show" identifier="goToChat" id="wRF-bv-aln"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="geT-Et-dez">
@@ -146,6 +145,7 @@
                     <connections>
                         <outlet property="emailTextfield" destination="geT-Et-dez" id="Iac-mJ-T6e"/>
                         <outlet property="passwordTextfield" destination="aLY-Aa-ufp" id="Lgf-rF-AcV"/>
+                        <segue destination="cQn-S9-Nkq" kind="show" identifier="goToChat" id="4bo-gs-z70"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Uu-N8-pum" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -165,7 +165,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2Md-3y-XSi">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="2Md-3y-XSi">
                                         <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="2Md-3y-XSi" id="LZ4-uD-N7p">
@@ -251,6 +251,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="wRF-bv-aln"/>
+        <segue reference="Zjw-z7-KWm"/>
     </inferredMetricsTieBreakers>
 </document>
