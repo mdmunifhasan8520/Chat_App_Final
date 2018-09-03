@@ -141,19 +141,20 @@ class ChatScreenViewController: UIViewController, UITableViewDelegate, UITableVi
         })
     }
     
-  
-    @IBAction func logOutPressed(_ sender: AnyObject) {
-        
-        //TODO: Log out the user and send them back to welcomeViewController
+    @IBAction func logoutPressed(_ sender: Any) {
+        print("logout pressed")
+        dismiss(animated: true, completion: nil)
         do {
             try Auth.auth().signOut()
             
             navigationController?.popToRootViewController(animated: true)
+             print("hello logout pressed")
         }
         catch {
             print("error, there was a problem sign Out")
         }
     }
+ 
     
     //TODO: Declare tableViewTapped here:
     @objc func tableViewTapped() {
